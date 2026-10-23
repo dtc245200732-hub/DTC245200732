@@ -1,0 +1,25 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets: ["prometheus:9090"]
+
+  # Metrics cho container Docker (cAdvisor).
+  - job_name: cadvisor
+    static_configs:
+      - targets: ["cadvisor:8080"]
+
+  # Metrics của PostgreSQL qua postgres_exporter.
+  - job_name: postgres
+    static_configs:
+      - targets: ["postgres-exporter:9187"]
+
+  # PetCare API chạy trực tiếp trên Windows host.
+  # Nếu backend của bạn chạy cổng 5000 thay vì 5001, sửa 5001 thành 5000.
+  - job_name: petcare-api
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["host.docker.internal:5001"]

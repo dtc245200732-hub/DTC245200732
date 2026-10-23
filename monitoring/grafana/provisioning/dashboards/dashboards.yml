@@ -1,0 +1,11 @@
+apiVersion: 1
+
+providers:
+  - name: PetCare dashboards
+    orgId: 1
+    folder: PetCare Spa
+    type: file
+    disableDeletion: false
+    editable: true
+    options:
+      path: /var/lib/grafana/dashboards

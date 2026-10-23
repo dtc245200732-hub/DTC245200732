@@ -1,0 +1,9 @@
+### Test Dang ky Tai khoan
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "full_name": "Nguyen Van A",
+  "email": "khach@example.com",
+  "password": "KhachHang123"
+}

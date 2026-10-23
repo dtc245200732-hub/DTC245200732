@@ -1,0 +1,25 @@
+
+# Node.js dependencies
+node_modules/
+**/node_modules/
+
+# Environment files containing secrets
+.env
+**/.env
+.env.*
+**/.env.*
+
+# Allow example environment files
+!.env.example
+!**/.env.example
+
+# Log files
+*.log
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Generated monitoring data
+monitoring/prometheus/data/
+monitoring/grafana/data/
