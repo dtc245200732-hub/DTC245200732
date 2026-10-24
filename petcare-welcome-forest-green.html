@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#193f35">
+  <title>PetCare Spa | Chăm sóc bằng cả trái tim</title>
+  <style>
+    :root {
+      --forest: #193f35;       /* Xanh rêu đậm chủ đạo */
+      --forest-2: #285749;
+      --forest-3: #3f6d5c;
+      --sage: #dce5d8;
+      --sage-light: #edf1e9;
+      --cream: #f4f2ec;        /* Xám kem */
+      --off-white: #fcfbf7;    /* Trắng nhạt */
+      --text: #263c33;
+      --muted: #65756c;
+      --line: #e0e4dc;
+      --shadow: 0 18px 45px rgba(25, 63, 53, .12);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--cream); color: var(--text);
+      font-family: "Segoe UI", Arial, sans-serif; line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(252, 251, 247, .94); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 25px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; min-width: max-content; }
+    .brand-icon {
+      width: 48px; height: 48px; border-radius: 16px; display: grid; place-items: center;
+      background: var(--forest); color: var(--off-white); font-size: 26px;
+      box-shadow: 0 8px 18px rgba(25, 63, 53, .18);
+    }
+    .brand-name { display: block; color: var(--forest); font-size: 22px; font-weight: 800; letter-spacing: -.5px; line-height: 1.2; }
+    .brand-tagline { display: block; color: var(--muted); font-size: 11px; margin-top: 3px; }
+    .nav-links { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 650; }
+    .nav-links a { transition: color .2s; }
+    .nav-links a:hover { color: var(--forest-3); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      border: 1px solid transparent; border-radius: 999px; padding: 13px 22px;
+      background: var(--forest); color: white; font: inherit; font-weight: 750;
+      cursor: pointer; box-shadow: 0 8px 20px rgba(25, 63, 53, .16);
+      transition: transform .2s, background .2s, box-shadow .2s;
+    }
+    .btn:hover { background: var(--forest-2); transform: translateY(-2px); box-shadow: 0 12px 24px rgba(25, 63, 53, .2); }
+    .btn-light { background: var(--off-white); color: var(--forest); border-color: #d7dfd5; box-shadow: none; }
+    .btn-light:hover { background: var(--sage-light); color: var(--forest); }
+    .hero { position: relative; overflow: hidden; padding: 62px 0 48px; }
+    .hero::before {
+      content: ""; position: absolute; width: 610px; height: 610px; border-radius: 50%;
+      right: -135px; top: 10px; background: var(--sage); opacity: .9;
+    }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: 44px; }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px; border-radius: 999px;
+      padding: 7px 14px; background: var(--sage-light); color: var(--forest);
+      font-size: 13px; font-weight: 750; border: 1px solid #e0e7dc;
+    }
+    h1 { margin: 19px 0 12px; color: var(--forest); font-size: clamp(46px, 5.4vw, 70px); line-height: 1.03; letter-spacing: -2.5px; }
+    .hero h2 { margin: 0 0 16px; color: var(--forest-2); font-size: clamp(27px, 3vw, 39px); line-height: 1.23; letter-spacing: -.8px; }
+    .hero-copy { max-width: 550px; color: #52645a; font-size: 17px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .hero-art { min-height: 420px; position: relative; display: grid; place-items: center; }
+    .hero-photo {
+      width: 100%; height: 420px; object-fit: cover; border-radius: 48% 48% 26px 26px;
+      border: 9px solid rgba(252, 251, 247, .82); box-shadow: var(--shadow); background: var(--sage);
+    }
+    .floating-note {
+      position: absolute; left: -21px; bottom: 22px; padding: 14px 19px;
+      background: var(--off-white); border: 1px solid #e5e8df; border-radius: 18px;
+      box-shadow: var(--shadow); color: var(--forest); font-weight: 750;
+    }
+    .floating-note small { display: block; font-size: 12px; color: var(--muted); font-weight: 500; }
+    .paw-deco { position: absolute; color: #91aa98; opacity: .58; font-size: 34px; pointer-events: none; }
+    .paw-a { top: 32px; right: 22px; } .paw-b { left: 2%; bottom: 24px; }
+    .quick-services {
+      position: relative; z-index: 2; display: grid; grid-template-columns: repeat(4, 1fr);
+      background: var(--off-white); border: 1px solid var(--line); border-radius: 24px;
+      padding: 19px; box-shadow: 0 10px 28px rgba(25, 63, 53, .06);
+    }
+    .quick-item { display: flex; align-items: center; gap: 13px; padding: 9px 15px; border-right: 1px solid var(--line); }
+    .quick-item:last-child { border-right: 0; }
+    .quick-icon { width: 56px; height: 56px; flex: 0 0 56px; display: grid; place-items: center; border-radius: 50%; background: var(--sage); color: var(--forest); font-size: 25px; }
+    .quick-item strong { display: block; color: var(--forest); font-size: 14px; line-height: 1.35; }
+    .quick-item small { display: block; color: var(--muted); font-size: 11px; margin-top: 4px; }
+    .section { padding: 76px 0; }
+    .section-heading { max-width: 680px; margin: 0 auto 34px; text-align: center; }
+    .section-heading h2 { color: var(--forest); margin: 13px 0 9px; font-size: clamp(29px, 3vw, 39px); line-height: 1.2; }
+    .section-heading p { margin: 0; color: var(--muted); }
+    .service-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .service-card { border: 1px solid var(--line); background: var(--off-white); border-radius: 20px; overflow: hidden; box-shadow: 0 8px 24px rgba(25, 63, 53, .055); transition: transform .2s, box-shadow .2s; }
+    .service-card:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .service-card img { display: block; width: 100%; height: 165px; object-fit: cover; background: var(--sage); }
+    .service-card-content { padding: 18px; }
+    .service-card h3 { margin: 0 0 7px; color: var(--forest); font-size: 17px; }
+    .service-card p { margin: 0; color: var(--muted); font-size: 13px; }
+    .why-section { background: #e9ede5; border-top: 1px solid #e1e6dd; border-bottom: 1px solid #e1e6dd; }
+    .benefits { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .benefit { text-align: center; padding: 22px 16px; }
+    .benefit-icon { width: 62px; height: 62px; display: grid; place-items: center; margin: 0 auto 13px; border-radius: 50%; color: var(--forest); background: #d6e1d2; font-size: 27px; }
+    .benefit h3 { color: var(--forest); margin: 0 0 6px; font-size: 16px; }
+    .benefit p { margin: 0; color: var(--muted); font-size: 13px; }
+    .cta { padding: 58px 0; }
+    .cta-box { border-radius: 27px; padding: 34px 40px; display: flex; align-items: center; justify-content: space-between; gap: 22px; color: #fff; background: var(--forest); box-shadow: var(--shadow); }
+    .cta-box h2 { margin: 0 0 7px; font-size: 28px; }
+    .cta-box p { margin: 0; color: #dce7dd; }
+    .cta-box .btn { background: var(--off-white); color: var(--forest); box-shadow: none; white-space: nowrap; }
+    footer { padding: 28px 0; background: var(--forest); color: #f6f7f2; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    footer .brand-name { color: white; } footer .brand-tagline { color: #d4e0d6; }
+    footer .brand-icon { background: rgba(255,255,255,.13); box-shadow: none; }
+    .footer-note { color: #dce7dd; font-size: 13px; }
+    .copyright { color: #dce7dd; font-size: 12px; }
+    @media (max-width: 940px) {
+      .nav-links { gap: 15px; }
+      .hero-grid { gap: 25px; }
+      .hero-art, .hero-photo { min-height: 350px; height: 350px; }
+      .quick-services { grid-template-columns: repeat(2, 1fr); }
+      .quick-item:nth-child(2) { border-right: 0; }
+      .quick-item:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .service-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 650px) {
+      .container { width: calc(100% - 28px); }
+      .nav { padding: 11px 0; min-height: 70px; flex-wrap: wrap; gap: 12px; }
+      .brand-icon { width: 41px; height: 41px; border-radius: 13px; }
+      .brand-name { font-size: 19px; }
+      .brand-tagline { font-size: 10px; }
+      .nav > .btn { padding: 10px 13px; font-size: 12px; }
+      .nav-links { order: 3; width: 100%; justify-content: space-between; gap: 8px; font-size: 12px; }
+      .hero { padding: 39px 0 30px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 24px; }
+      .hero::before { width: 340px; height: 340px; right: -150px; top: auto; bottom: 80px; }
+      h1 { font-size: 49px; }
+      .hero h2 { font-size: 29px; }
+      .hero-copy { font-size: 15px; }
+      .hero-art, .hero-photo { min-height: 295px; height: 295px; }
+      .hero-photo { border-radius: 38% 38% 22px 22px; }
+      .floating-note { left: -4px; bottom: 10px; padding: 11px 13px; font-size: 13px; }
+      .quick-services { padding: 10px; border-radius: 19px; }
+      .quick-item { padding: 12px 4px; gap: 8px; }
+      .quick-icon { width: 42px; height: 42px; flex-basis: 42px; font-size: 20px; }
+      .quick-item strong { font-size: 12px; }
+      .quick-item small { font-size: 10px; }
+      .section { padding: 53px 0; }
+      .service-grid { gap: 12px; }
+      .service-card img { height: 125px; }
+      .service-card-content { padding: 13px; }
+      .service-card h3 { font-size: 14px; }
+      .service-card p { font-size: 12px; }
+      .benefits { grid-template-columns: repeat(2, 1fr); gap: 5px; }
+      .cta-box { flex-direction: column; align-items: flex-start; padding: 27px 22px; }
+      .cta-box h2 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a class="brand" href="#home" aria-label="PetCare Spa - Trang chủ">
+        <span class="brand-icon">🐾</span>
+        <span><span class="brand-name">PetCare Spa</span><span class="brand-tagline">Yêu thương từ những điều nhỏ nhất</span></span>
+      </a>
+      <nav class="nav-links" aria-label="Điều hướng">
+        <a href="#home">Trang chủ</a><a href="#services">Dịch vụ</a><a href="#why">Về chúng tôi</a><a href="#contact">Liên hệ</a>
+      </nav>
+      <a class="btn" href="index.html">Vào hệ thống <span aria-hidden="true">↗</span></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <span class="paw-deco paw-a">🐾</span><span class="paw-deco paw-b">🐾</span>
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <span class="eyebrow">♥ Chăm sóc thú cưng toàn diện</span>
+          <h1>PetCare Spa</h1>
+          <h2>Nơi yêu thương được chăm sóc trọn vẹn</h2>
+          <p class="hero-copy">Chúng tôi mang đến những dịch vụ chăm sóc thú cưng chuyên nghiệp, an toàn và tận tâm, giúp bé luôn khỏe mạnh, sạch sẽ và hạnh phúc.</p>
+          <div class="hero-actions">
+            <a class="btn" href="#services">🐾 Khám phá dịch vụ <span aria-hidden="true">→</span></a>
+            <a class="btn btn-light" href="#why">Tìm hiểu thêm</a>
+          </div>
+        </div>
+        <div class="hero-art">
+          <img class="hero-photo" src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=1100&q=85" alt="Chú chó thân thiện đại diện cho PetCare Spa" onerror="this.onerror=null;this.src='https://placehold.co/900x700/dce5d8/193f35?text=PetCare+Spa';">
+          <div class="floating-note">♡ Chăm sóc bằng cả trái tim<small>Khỏe mạnh · Sạch sẽ · Hạnh phúc</small></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="quick-services" aria-label="Các dịch vụ chính">
+        <div class="quick-item"><span class="quick-icon">🛁</span><div><strong>Tắm &amp; Vệ sinh</strong><small>Sạch sẽ, thơm tho, an toàn</small></div></div>
+        <div class="quick-item"><span class="quick-icon">✂️</span><div><strong>Cắt tỉa lông</strong><small>Chăm chút diện mạo</small></div></div>
+        <div class="quick-item"><span class="quick-icon">🐾</span><div><strong>Chăm sóc sức khỏe</strong><small>Quan tâm từng ngày</small></div></div>
+        <div class="quick-item"><span class="quick-icon">🏡</span><div><strong>Khách sạn thú cưng</strong><small>An toàn, thoải mái</small></div></div>
+      </div>
+    </div>
+
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-heading"><span class="eyebrow">🐾 Dịch vụ của chúng tôi</span><h2>Bé cưng xứng đáng được chăm sóc tốt nhất</h2><p>Những lựa chọn chăm sóc được thiết kế để mỗi lần ghé thăm đều là trải nghiệm dễ chịu cho bạn và thú cưng.</p></div>
+        <div class="service-grid">
+          <article class="service-card"><img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=700&q=80" alt="Chăm sóc vệ sinh cho thú cưng" loading="lazy"><div class="service-card-content"><h3>Tắm &amp; Vệ sinh</h3><p>Làm sạch nhẹ nhàng với quy trình phù hợp cho từng bé.</p></div></article>
+          <article class="service-card"><img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&w=700&q=80" alt="Chăm sóc lông thú cưng" loading="lazy"><div class="service-card-content"><h3>Cắt tỉa lông</h3><p>Gọn gàng, đáng yêu và phù hợp với đặc điểm của thú cưng.</p></div></article>
+          <article class="service-card"><img src="https://images.unsplash.com/photo-1551717743-49959800b1f6?auto=format&fit=crop&w=700&q=80" alt="Chú chó khỏe mạnh vui vẻ" loading="lazy"><div class="service-card-content"><h3>Chăm sóc sức khỏe</h3><p>Quan tâm vệ sinh và nhu cầu chăm sóc thường ngày của bé.</p></div></article>
+          <article class="service-card"><img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&w=700&q=80" alt="Mèo đáng yêu" loading="lazy"><div class="service-card-content"><h3>Khách sạn thú cưng</h3><p>Không gian nghỉ ngơi thoải mái khi bạn bận rộn hoặc đi xa.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section why-section" id="why">
+      <div class="container">
+        <div class="section-heading"><span class="eyebrow">♥ Tận tâm trong từng dịch vụ</span><h2>Tại sao chọn PetCare Spa?</h2><p>Mỗi bé cưng đều xứng đáng nhận được sự chăm sóc dịu dàng, an toàn và chu đáo.</p></div>
+        <div class="benefits">
+          <article class="benefit"><div class="benefit-icon">♡</div><h3>Đội ngũ tận tâm</h3><p>Chăm sóc bằng sự kiên nhẫn và yêu thương.</p></article>
+          <article class="benefit"><div class="benefit-icon">🛡</div><h3>Ưu tiên an toàn</h3><p>Chú trọng vệ sinh và sự thoải mái của bé.</p></article>
+          <article class="benefit"><div class="benefit-icon">🌿</div><h3>Sản phẩm phù hợp</h3><p>Lựa chọn theo nhu cầu chăm sóc thú cưng.</p></article>
+          <article class="benefit"><div class="benefit-icon">☆</div><h3>Dịch vụ linh hoạt</h3><p>Nhiều lựa chọn để bạn dễ chăm sóc bé.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="contact"><div class="container"><div class="cta-box"><div><h2>Sẵn sàng chăm sóc bé cưng?</h2><p>Vào hệ thống PetCare Spa để khám phá các chức năng quản lý.</p></div><a class="btn" href="index.html">Vào giao diện tổng quan →</a></div></div></section>
+  </main>
+
+  <footer><div class="container footer-inner">
+    <a class="brand" href="#home"><span class="brand-icon">🐾</span><span><span class="brand-name">PetCare Spa</span><span class="brand-tagline">Yêu thương từ những điều nhỏ nhất</span></span></a>
+    <div class="footer-note">Đồng hành cùng bạn trong hành trình chăm sóc thú cưng ♥</div>
+    <div class="copyright">© 2026 PetCare Spa. All rights reserved.</div>
+  </div></footer>
+</body>
+</html>
